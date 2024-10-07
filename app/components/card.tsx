@@ -1,17 +1,32 @@
-import Image from 'next/image'
-import React from 'react'
-
-export const Card = () => {
-  return (
-    <div className='max-w-60 bg-red-300'>
-        <Image src={"https://plus.unsplash.com/premium_photo-1689620815896-b61fdab3d733?q=80&w=4064&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
-            layout='fill'
-            alt='image'
-            style={{objectFit: 'cover'}}
-        />
-        <div>name</div>
-        <div>It is in perfect condition and working perfectly. 9 months old and still under warranty. No faults and scratches on the screen.model number : UA75RU7100W 2021 year model. Box available for easy transportation.</div>
-        <div>price</div>
-    </div>
-  )
+import Image from "next/image";
+interface CardProps {
+  name: string;
+  description: string;
+  price: number;
+  imageUrl: string;
 }
+const Card: React.FC<CardProps> = ({ name, description, price, imageUrl }) => {
+  return (
+    <div className="max-w-sm rounded-xl overflow-hidden shadow-lg">
+      <div className="relative h-56">
+        <Image
+          src={imageUrl}
+          alt={name}
+          layout="fill"
+          objectFit="cover"
+          className="rounded-t"
+        />
+      </div>
+      <div className="px-6 py-4">
+        <div className="font-bold text-xl mb-2">{name}</div>
+        <p className="text-gray-700 text-base truncate">{description}</p>
+      </div>
+      <div className="px-6 py-4">
+        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+          ${price}
+        </span>
+      </div>
+    </div>
+  );
+};
+export default Card;
